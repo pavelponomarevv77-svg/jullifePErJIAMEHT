@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клининговый сервис - Рабочий портал оператора</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 0;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .logo {
+            font-size: 40px;
+            color: #4CAF50;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #4CAF50;
+            background-color: #f8fdf8;
+            color: #2c3e50;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        h3 {
+            color: #4a6491;
+            margin: 25px 0 15px;
+        }
+        
+        .alert-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .success-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .process-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        
+        .process-step {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            width: 180px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            background-color: #4CAF50;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        .step-danger .step-number {
+            background-color: #f44336;
+        }
+        
+        .step-warning .step-number {
+            background-color: #ff9800;
+        }
+        
+        .cleaning-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .cleaning-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cleaning-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-body ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .card-body li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .card-body li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+        
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .compare-table th, .compare-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .compare-table th {
+            background-color: #f5f7fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .compare-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .regulations {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .regulation-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .staff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+        
+        .staff-table th, .staff-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .staff-table th {
+            background-color: #4a6491;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        
+        .staff-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .phone-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .phone-link:hover {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #3d8b40;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-warning {
+            background-color: #ff9800;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e68900;
+        }
+        
+        .btn-danger {
+            background-color: #f44336;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+        
+        .extra-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .service-tag {
+            background-color: #e8f5e9;
+            border: 1px solid #4CAF50;
+            border-radius: 20px;
+            padding: 8px 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .calculator-link {
+            display: inline-block;
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .calculator-link:hover {
+            background-color: #0b7dda;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-top: 15px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-step {
+                width: 90%;
+                margin-bottom: 15px;
+            }
+            
+            .cleaning-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .compare-table, .staff-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .extra-services {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .staff-table {
+                font-size: 12px;
+            }
+            
+            .staff-table th, .staff-table td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Клининговый сервис "jullife"</h1>
+                    <p class="subtitle">Рабочий портал оператора | Внутренняя система</p>
+                </div>
+                <div class="logo">
+                    <i class="fas fa-broom"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="tab active" data-tab="claims">Работа с претензиями</div>
+            <div class="tab" data-tab="cleaning-types">Виды уборок</div>
+            <div class="tab" data-tab="regulations">Регламенты уборок</div>
+            <div class="tab" data-tab="staff">Сотрудники</div>
+        </div>
+        
+        <!-- Блок работы с претензиями -->
+        <div id="claims" class="tab-content active">
+            <h2><i class="fas fa-exclamation-triangle"></i> Обработка претензий клиентов</h2>
+            
+            <div class="alert-box">
+                <p><strong>Внимание!</strong> Согласно оферте, претензии принимаются только в течение 24 часов после выполнения уборки. Претензии, поступившие позднее этого срока, не рассматриваются, но руководство обязательно уведомляется о таких случаях.</p>
+            </div>
+            
+            <h3>Алгоритм обработки претензии</h3>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <p><strong>Прием претензии</strong></p>
+                    <p>Зафиксируйте время обращения и проверьте, прошло ли менее 24 часов с момента уборки</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <p><strong>Анализ ситуации</strong></p>
+                    <p>Выясните причину недовольства, запросите фото/видео при необходимости</p>
+                </div>
+                
+                <div class="process-step step-warning">
+                    <div class="step-number">3</div>
+                    <p><strong>Предложение доуборки</strong></p>
+                    <p>При незначительных недостатках предложите и оформите доуборку на объекте</p>
+                </div>
+                
+                <div class="process-step step-danger">
+                    <div class="step-number">4</div>
+                    <p><strong>Эскалация руководству</strong></p>
+                    <p>Если клиент требует возмещения или настроен крайне негативно - свяжитесь с руководством</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <p><strong>Оформление возврата</strong></p>
+                    <p>Только по согласованию с руководством оформите возврат средств</p>
+                </div>
+            </div>
+            
+            <h3>Быстрые действия оператора</h3>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+                <button class="btn" id="reclean-btn">Оформить доуборку</button>
+                <button class="btn btn-warning" id="escalate-btn">Эскалировать претензию</button>
+                <button class="btn btn-danger" id="refund-btn">Оформить возврат</button>
+                <button class="btn btn-secondary" id="reject-btn">Отклонить претензию (более 24ч)</button>
+            </div>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <p><strong>Памятка для оператора:</strong></p>
+                <ul>
+                    <li>Всегда сохраняйте спокойный и профессиональный тон</li>
+                    <li>Предлагайте решения, а не оправдания</li>
+                    <li>Документируйте все этапы обработки претензии</li>
+                    <li>При эскалации к руководству подготовьте полную информацию по ситуации</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Блок видов уборок -->
+        <div id="cleaning-types" class="tab-content">
+            <h2><i class="fas fa-list-alt"></i> Виды уборок и их особенности</h2>
+            
+            <div class="cleaning-types">
+                <div class="cleaning-card">
+                    <div class="card-header" style="background-color: #4CAF50;">
+                        Поддерживающая уборка
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Регулярная уборка для поддержания чистоты</strong></p>
+                        <ul>
+                            <li>Сухая и влажная уборка полов</li>
+                            <li>Удаление пыли с поверхностей</li>
+                            <li>Очистка зеркал и стеклянных поверхностей</li>
+                            <li>Чистка раковин и сантехники</li>
+                            <li>Вынос мусора</li>
+                        </ul>
+                        <p><strong>Идеально для:</strong> регулярного поддержания чистоты между генеральными уборками</p>
+                        
+                        <h4 style="margin-top: 15px; color: #4a6491; font-size: 16px;">Дополнительные услуги:</h4>
+                        <div class="extra-services">
+                            <div class="service-tag">Глажка</div>
+                            <div class="service-tag">Мытье посуды</div>
+                            <div class="service-tag">Мытье кухонных модулей</div>
+                            <div class="service-tag">Мытье окон</div>
+                            <div class="service-tag">Мытье холодильника</div>
+                            <div class="service-tag">Мытье СВЧ</div>
+                            <div class="service-tag">Мытье духового шкафа</div>
+                            <div class="service-tag">Очистка вытяжки</div>
+                            <div class="service-tag">Уборка лотка питомца</div>
+                            <div class="service-tag">Уборка на балконе/лоджии</div>
+                            <div class="service-tag">Химчистка мягкой мебели</div>
+                            <div class="service-tag">Химчистка ковров</div>
+                        </div>
+                        <p><strong>Цены на дополнительные услуги можно посмотреть в <a href="https://pavelponomarevv77-svg.github.io/julliferaspred/" target="_blank" class="calculator-link">калькуляторе цен</a></strong></p>
+                    </div>
+                </div>
+                
+                <div class="cleaning-card">
+                    <div class="card-header" style="background-color: #2196F3;">
+                        Генеральная "Лайт"
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Более тщательная уборка с удалением загрязнений средней стойкости (не застоявшиеся)</strong></p>
+                        <ul>
+                            <li>Всё из поддерживающей уборки</li>
+                            <li>Мытье стен до уровня 1.5 м</li>
+                            <li>Очистка выключателей, дверных ручек</li>
+                            <li>Мытье кухонных фасадов</li>
+                            <li>Очистка радиаторов отопления</li>
+                            <li>Удаление средних жировых отложений и налета в санузлах</li>
+                        </ul>
+                        <p><strong>Плюсы:</strong> Удаление загрязнений средней стойкости без необходимости изменения обстановки, экономия времени (на 30-40% быстрее полной генеральной), оптимальное соотношение цены и качества очистки.</p>
+                        
+                        <h4 style="margin-top: 15px; color: #4a6491; font-size: 16px;">Дополнительные услуги:</h4>
+                        <div class="extra-services">
+                            <div class="service-tag">Глажка</div>
+                            <div class="service-tag">Мытье посуды</div>
+                            <div class="service-tag">Мытье кухонных модулей</div>
+                            <div class="service-tag">Мытье окон</div>
+                            <div class="service-tag">Мытье холодильника</div>
+                            <div class="service-tag">Мытье СВЧ</div>
+                            <div class="service-tag">Мытье духового шкафа</div>
+                            <div class="service-tag">Очистка вытяжки</div>
+                            <div class="service-tag">Уборка лотка питомца</div>
+                            <div class="service-tag">Уборка на балконе/лоджии</div>
+                            <div class="service-tag">Химчистка мягкой мебели</div>
+                            <div class="service-tag">Химчистка ковров</div>
+                        </div>
+                        <p><strong>Цены на дополнительные услуги можно посмотреть в <a href="https://pavelponomarevv77-svg.github.io/julliferaspred/" target="_blank" class="calculator-link">калькуляторе цен</a></strong></p>
+                    </div>
+                </div>
+                
+                <div class="cleaning-card">
+                    <div class="card-header" style="background-color: #FF9800;">
+                        Генеральная уборка
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Полная, глубокая уборка всего помещения с использованием специализированного оборудования</strong></p>
+                        <ul>
+                            <li>Всё из генеральной "Лайт"</li>
+                            <li>Мойка люстр и светильников</li>
+                            <li>Очистка внутренних поверхностей шкафов</li>
+                            <li>Доставка специализированного оборудования (пылесос, парогенератор, стремянка)</li>
+                            <li>Использование специальной химии для стойких загрязнений</li>
+                        </ul>
+                        <p><strong>Плюсы:</strong> Полное обновление чистоты помещения, устранение глубоких загрязнений, профессиональная очистка с использованием специального оборудования.</p>
+                        
+                        <h4 style="margin-top: 15px; color: #4a6491; font-size: 16px;">Дополнительные услуги:</h4>
+                        <div class="extra-services">
+                            <div class="service-tag">Глажка</div>
+                            <div class="service-tag">Мытье посуды</div>
+                            <div class="service-tag">Мытье кухонных модулей</div>
+                            <div class="service-tag">Мытье окон</div>
+                            <div class="service-tag">Мытье холодильника</div>
+                            <div class="service-tag">Мытье СВЧ</div>
+                            <div class="service-tag">Мытье духового шкафа</div>
+                            <div class="service-tag">Очистка вытяжки</div>
+                            <div class="service-tag">Уборка лотка питомца</div>
+                            <div class="service-tag">Уборка на балконе/лоджии</div>
+                            <div class="service-tag">Химчистка мягкой мебели</div>
+                            <div class="service-tag">Химчистка ковров</div>
+                        </div>
+                        <p><strong>Цены на дополнительные услуги можно посмотреть в <a href="https://pavelponomarevv77-svg.github.io/julliferaspred/" target="_blank" class="calculator-link">калькуляторе цен</a></strong></p>
+                    </div>
+                </div>
+                
+                <div class="cleaning-card">
+                    <div class="card-header" style="background-color: #9C27B0;">
+                        Уборка после ремонта
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Специализированная уборка после строительных работ</strong></p>
+                        <ul>
+                            <li>Удаление строительной пыли со всех поверхностей</li>
+                            <li>Очистка от остатков строительных материалов</li>
+                            <li>Уборка строительного мусора</li>
+                            <li>Влажная уборка всех поверхностей с применением моющих средств</li>
+                            <li>Мытье полов, возможно в несколько этапов</li>
+                        </ul>
+                        <p><strong>Идеально для:</strong> подготовки помещения к проживанию после ремонта</p>
+                        
+                        <h4 style="margin-top: 15px; color: #4a6491; font-size: 16px;">Дополнительные услуги:</h4>
+                        <div class="extra-services">
+                            <div class="service-tag">Глажка</div>
+                            <div class="service-tag">Мытье посуды</div>
+                            <div class="service-tag">Мытье кухонных модулей</div>
+                            <div class="service-tag">Мытье окон</div>
+                            <div class="service-tag">Мытье холодильника</div>
+                            <div class="service-tag">Мытье СВЧ</div>
+                            <div class="service-tag">Мытье духового шкафа</div>
+                            <div class="service-tag">Очистка вытяжки</div>
+                            <div class="service-tag">Уборка лотка питомца</div>
+                            <div class="service-tag">Уборка на балконе/лоджии</div>
+                            <div class="service-tag">Химчистка мягкой мебели</div>
+                            <div class="service-tag">Химчистка ковров</div>
+                        </div>
+                        <p><strong>Цены на дополнительные услуги можно посмотреть в <a href="https://pavelponomarevv77-svg.github.io/julliferaspred/" target="_blank" class="calculator-link">калькуляторе цен</a></strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Сравнительная таблица видов уборок</h3>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Критерий</th>
+                        <th>Поддерживающая</th>
+                        <th>Генеральная "Лайт"</th>
+                        <th>Генеральная</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Стоимость</strong></td>
+                        <td>Наиболее доступная</td>
+                        <td>Средняя</td>
+                        <td>Выше средней</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Время выполнения</strong></td>
+                        <td>1-3 часа</td>
+                        <td>3-5 часов</td>
+                        <td>5-8 часов</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Частота</strong></td>
+                        <td>Еженедельно/ежедневно</td>
+                        <td>1-2 раза в месяц</td>
+                        <td>1-4 раза в год</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Уровень очистки</strong></td>
+                        <td>Поверхностный</td>
+                        <td>Удаление загрязнений среднего типа (не застоявшиеся)</td>
+                        <td>Комплексный глубокий</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Чем отличается поддерживающая уборка от генеральной "Лайт"?</h3>
+            <div class="info-box">
+                <p><strong>Поддерживающая уборка</strong> - это регулярная уборка для поддержания ежедневной чистоты. Она включает базовые операции: уборка полов, вытирание пыли, чистка санузлов.</p>
+                <p><strong>Генеральная "Лайт"</strong> - это более глубокая уборка, которая охватывает труднодоступные места, которые не чистятся при поддерживающей уборке: мытье стен, очистка радиаторов, мытье кухонных фасадов, уделяем внимание средним жировым отложениям и налету в санузлах и душевых комнатах.</p>
+                <p><strong>Плюсы генеральной "Лайт":</strong> Удаление загрязнений средней стойкости без необходимости изменения обстановки, экономия времени (на 30-40% быстрее полной генеральной), оптимальное соотношение цены и качества очистки.</p>
+            </div>
+            
+            <h3>Чем отличается генеральная уборка от генеральной "Лайт"?</h3>
+            <div class="info-box">
+                <p><strong>Генеральная "Лайт"</strong> - это улучшенная версия поддерживающей уборки с элементами глубокой очистки, направленная на удаление загрязнений средней стойкости в доступных местах.</p>
+                <p><strong>Генеральная уборка</strong> - это полная, комплексная очистка помещения с доступом к внутренним поверхностям шкафов, мойкой люстр и других сложных элементов с использованием специального оборудования и химии.</p>
+                <p><strong>Плюсы полной генеральной уборки:</strong> Абсолютная чистота во всех доступных уголках помещения, устранение глубоких и застарелых загрязнений, очистка мест, которые обычно не затрагиваются при других видах уборки, эффект "как после ремонта", использование профессионального оборудования и специальной химии.</p>
+            </div>
+        </div>
+        
+        <!-- Блок регламентов уборок -->
+        <div id="regulations" class="tab-content">
+            <h2><i class="fas fa-clipboard-list"></i> Регламенты выполнения уборок</h2>
+            
+            <div class="regulations">
+                <div class="regulation-item">
+                    <h3>Регламент поддерживающей уборки</h3>
+                    <p><strong>Время выполнения:</strong> 1-3 часа в зависимости от площади</p>
+                    <p><strong>Инструменты и средства:</strong> Швабры, ведра, microfiber тряпки, стеклоочистители, универсальные чистящие средства</p>
+                    <p><strong>Последовательность действий:</strong></p>
+                    <ol>
+                        <li>Собрать и вынести мусор</li>
+                        <li>Протереть все горизонтальные поверхности от пыли</li>
+                        <li>Очистить зеркала и стеклянные поверхности</li>
+                        <li>Протереть сантехнику в ванной и туалете</li>
+                        <li>Пропылесосить и помыть полы</li>
+                        <li>Проверить качество выполненных работ</li>
+                    </ol>
+                </div>
+                
+                <div class="regulation-item">
+                    <h3>Регламент генеральной уборки "Лайт"</h3>
+                    <p><strong>Время выполнения:</strong> 3-5 часов в зависимости от площади</p>
+                    <p><strong>Дополнительные инструменты:</strong> Стремянка, щетки для радиаторов, средства для удаления жировых отложений</p>
+                    <p><strong>Последовательность действий (включая все этапы поддерживающей уборки плюс):</strong></p>
+                    <ol>
+                        <li>Очистить стены до уровня 1.5 метра от загрязнений средней стойкости</li>
+                        <li>Протереть выключатели, дверные ручки, розетки</li>
+                        <li>Очистить радиаторы отопления внутри и снаружи</li>
+                        <li>Помыть кухонные фасады и бытовую технику снаружи</li>
+                        <li>Удалить средние жировые отложения на кухне и ванной</li>
+                        <li>Помыть плитку в ванной комнате с удалением налета</li>
+                    </ol>
+                </div>
+                
+                <div class="regulation-item">
+                    <h3>Регламент генеральной уборки</h3>
+                    <p><strong>Время выполнения:</strong> 5-8 часов в зависимости от площади</p>
+                    <p><strong>Дополнительные инструменты:</strong> Профессиональная стремянка, набор щеток для глубокой очистки, парогенератор, специальная химия</p>
+                    <p><strong>Последовательность действий (включая все этапы генеральной "Лайт" плюс):</strong></p>
+                    <ol>
+                        <li>Снять и помыть люстры, светильники (с согласия клиента)</li>
+                        <li>Очистить внутренние поверхности шкафов и полок</li>
+                        <li>Помыть двери со всех сторон, включая косяки</li>
+                        <li>Очистить доступные пространства за и под мебелью</li>
+                        <li>Применение специальной химии для стойких загрязнений</li>
+                    </ol>
+                </div>
+                
+                <div class="regulation-item">
+                    <h3>Регламент уборки после ремонта</h3>
+                    <p><strong>Время выполнения:</strong> 4-10 часов в зависимости от объема работ</p>
+                    <p><strong>Специальные инструменты:</strong> Строительный пылесос, скребки для удаления строительных смесей, средства для удаления монтажной пены</p>
+                    <p><strong>Последовательность действий:</strong></p>
+                    <ol>
+                        <li>Удаление крупного строительного мусора</li>
+                        <li>Очистка всех поверхностей от строительной пыли с помощью строительного пылесоса</li>
+                        <li>Удаление следов строительных смесей, клея, монтажной пены</li>
+                        <li>Влажная уборка всех поверхностей с применением моющих средств</li>
+                        <li>Мытье полов, возможно в несколько этапов</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Блок сотрудников -->
+        <div id="staff" class="tab-content">
+            <h2><i class="fas fa-users"></i> Сотрудники клинингового сервиса</h2>
+            
+            <div class="alert-box">
+                <p><strong>Внимание!</strong> Данная информация является конфиденциальной и предназначена только для внутреннего использования сотрудниками компании.</p>
+                <p><strong>Для срочных заказов звоните бригадиру Мирон +7 980 489-28-98</strong></p>
+            </div>
+            
+            <h3>Клинеры (Вайтера)</h3>
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>Компания</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Фирсанова Юлия Сергеевна</td>
+                        <td><a href="tel:+79851931978" class="phone-link">+7 985 193 19 78</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>Беседина Анна Николаевна</td>
+                        <td><a href="tel:+79999185290" class="phone-link">+7 999 918 52 90</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>(Джава) Искандеров Джавахир Вахабович</td>
+                        <td><a href="tel:+79253836066" class="phone-link">+7 925 383 60 66</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>(Джони) Рустамов Жавохирбек Шухрат Угли</td>
+                        <td><a href="tel:+79771822772" class="phone-link">+7 977 182 27 72</a></td>
+                        <td>Вайтера (не в штате)</td>
+                    </tr>
+                    <tr>
+                        <td>(Бобош) Мирпочоев Махкамбой Азамджонович</td>
+                        <td><a href="tel:+79150769173" class="phone-link">+7 915 076-91-73</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>Усмонова Дилором Мардоновна</td>
+                        <td><a href="tel:+79851032485" class="phone-link">+7 985 103 24 85</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>МИРЗОЕВА ГУЛРУХОН МИРЗОАЛИЕВНА</td>
+                        <td><a href="tel:+79916186448" class="phone-link">+7 991 618 64 48</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>САИДОВА СУДОБА МЕЛИКОВНА</td>
+                        <td><a href="tel:+79773884331" class="phone-link">+7 977 388 43 31</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                    <tr>
+                        <td>Каюмова Фируза Азимовна</td>
+                        <td><a href="tel:+79360013115" class="phone-link">+7 936 001-31-15</a></td>
+                        <td>Вайтера</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Клинеры (Гросс Групп)</h3>
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>Компания</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Кузнецова Наталья Николаевна</td>
+                        <td><a href="tel:+79999185290" class="phone-link">+7 999 918 52 90</a></td>
+                        <td>Гросс Групп</td>
+                    </tr>
+                    <tr>
+                        <td>(Мирон) Мирпочоев Мирджахон Азамджонович</td>
+                        <td><a href="tel:+79804892898" class="phone-link">+7 980 489-28-98</a></td>
+                        <td>Гросс Групп</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Клинеры (Запас)</h3>
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>Компания</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Фомина Елена Петровна</td>
+                        <td><a href="tel:+79107815848" class="phone-link">+7 910 781 58 48</a></td>
+                        <td>Запас</td>
+                        <td>Не в штате</td>
+                    </tr>
+                    <tr>
+                        <td>Фролова Яна Сергеевна</td>
+                        <td><a href="tel:+79996337749" class="phone-link">+7 999 633-77-49</a></td>
+                        <td>Запас</td>
+                        <td>Не в штате</td>
+                    </tr>
+                    <tr>
+                        <td>Ибрагимова Шахноза Кахрамон Кизи</td>
+                        <td><a href="tel:+79264218817" class="phone-link">+7 926 421-88-17</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Семенова Екатерина Владимировна</td>
+                        <td><a href="tel:+79615305022" class="phone-link">+7 961 530 50 22</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Прохода Мария Сергеевна</td>
+                        <td><a href="tel:+89103462392" class="phone-link">8 910 346 23 92</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Агеева Анна Геннадьевна</td>
+                        <td><a href="tel:+89106090549" class="phone-link">8 910 609 05 49</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Дарья</td>
+                        <td><a href="tel:+89994028264" class="phone-link">8 999 402 82 64</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Мамедова Зейнап Салман Кызы</td>
+                        <td><a href="tel:+79161002679" class="phone-link">+7 916 100 26 79</a></td>
+                        <td>Запас</td>
+                        <td>Не в штате</td>
+                    </tr>
+                    <tr>
+                        <td>Гвта Сергей Рустямович</td>
+                        <td><a href="tel:+79775644963" class="phone-link">+7 977 564-49-63</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Маслакова Анастасия</td>
+                        <td><a href="tel:+79854231969" class="phone-link">+7 985 423 19 69</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Ерёменко Вадим Анатольевич</td>
+                        <td><a href="tel:+79337148419" class="phone-link">+7 933 714-84-19</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Гробовенко Ника Николаевна</td>
+                        <td><a href="tel:+79337149397" class="phone-link">+7 933 714 93 97</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Жиян Маргарита Андреевна</td>
+                        <td><a href="tel:+79775056923" class="phone-link">+7 977 505 69 23</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>(Тина) Унгуэма Мьён Жустина</td>
+                        <td><a href="tel:+79309181295" class="phone-link">+7 930 918 12 95</a></td>
+                        <td>Запас</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>СМЗ</h3>
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Альбина Ермашова Терентьевна</td>
+                        <td><a href="tel:+79154087384" class="phone-link">+7 915 408 73 84</a></td>
+                    </tr>
+                    <tr>
+                        <td>Голубев Павел Петрович</td>
+                        <td><a href="tel:+79604514355" class="phone-link">+7 960 451 43 55</a></td>
+                    </tr>
+                    <tr>
+                        <td>Александра Алексеевна Пунегова</td>
+                        <td><a href="tel:+79121464876" class="phone-link">+7 912 146 48 76</a></td>
+                    </tr>
+                    <tr>
+                        <td>Серикжан Хаиржани Капкенгали</td>
+                        <td><a href="tel:+79851079006" class="phone-link">+7 985 107 90 06</a></td>
+                    </tr>
+                    <tr>
+                        <td>Арапбаева Асель Нурпазыловна</td>
+                        <td><a href="tel:+79771109529" class="phone-link">+7 977 110-95-29</a></td>
+                    </tr>
+                    <tr>
+                        <td>Валиулин Дмитрий Сергеевич</td>
+                        <td><a href="tel:+79236348832" class="phone-link">+7 923 634 88 32</a></td>
+                    </tr>
+                    <tr>
+                        <td>Черкасова Сайера Алишеровна</td>
+                        <td><a href="tel:+79771109529" class="phone-link">+7 977 110 95 29</a></td>
+                    </tr>
+                    <tr>
+                        <td>Круглов Тимофей Васильевич</td>
+                        <td><a href="tel:+79622378534" class="phone-link">+7 962 237 85 34</a></td>
+                    </tr>
+                    <tr>
+                        <td>Гармаева Евгения Генденжаповна</td>
+                        <td><a href="tel:+79025357468" class="phone-link">+7 902 535 74 68</a></td>
+                    </tr>
+                    <tr>
+                        <td>Михайлюк Лев Валерьевич</td>
+                        <td><a href="tel:+79242386702" class="phone-link">+7 924 238 67 02</a></td>
+                    </tr>
+                    <tr>
+                        <td>Пичугина Елена Васильевна</td>
+                        <td><a href="tel:+79688919821" class="phone-link">+7 968 891 98 21</a></td>
+                    </tr>
+                    <tr>
+                        <td>Жиян Маргарита Андреевна</td>
+                        <td><a href="tel:+79775056923" class="phone-link">+7 977 505 69 23</a></td>
+                    </tr>
+                    <tr>
+                        <td>Бероева Илона Анатольевна</td>
+                        <td><a href="tel:+79194250921" class="phone-link">+7 919 425 09 21</a></td>
+                    </tr>
+                    <tr>
+                        <td>Фомина Елена Петровна</td>
+                        <td><a href="tel:+79107815848" class="phone-link">+7 910 781 58 48</a></td>
+                    </tr>
+                    <tr>
+                        <td>Веселова Олеся Юрьевна</td>
+                        <td><a href="tel:+79635741399" class="phone-link">+7 963 574 13 99</a></td>
+                    </tr>
+                    <tr>
+                        <td>Плетнев Артур Андреевич</td>
+                        <td><a href="tel:+79773894865" class="phone-link">+7 977 389 48 65</a></td>
+                    </tr>
+                    <tr>
+                        <td>Сафронов Максим Вячеславович</td>
+                        <td><a href="tel:+79512797611" class="phone-link">+7 951 279 76 11</a></td>
+                    </tr>
+                    <tr>
+                        <td>Маслакова Анастасия Алексеевна</td>
+                        <td><a href="tel:+79854231969" class="phone-link">+7 985 423 19 69</a></td>
+                    </tr>
+                    <tr>
+                        <td>Умывалкина Александра Валерьевна</td>
+                        <td><a href="tel:+79684001927" class="phone-link">+7 968 400 19 27</a></td>
+                    </tr>
+                    <tr>
+                        <td>Аминова Шахзода Авазовна</td>
+                        <td><a href="tel:+79823060396" class="phone-link">+7 982 306 03 96</a></td>
+                    </tr>
+                    <tr>
+                        <td>Андерс Александра Анатольевна</td>
+                        <td><a href="tel:+79262536843" class="phone-link">+7 926 253 68 43</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Водители</h3>
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Автомобиль</th>
+                        <th>Телефон</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Андрей</td>
+                        <td>Лада Веста, Е892АВ550</td>
+                        <td><a href="tel:+89999894080" class="phone-link">8 999 989 40 80</a></td>
+                    </tr>
+                    <tr>
+                        <td>Григорий</td>
+                        <td>Рено Докер, С235АО550</td>
+                        <td><a href="tel:+89166586676" class="phone-link">8 916 658 66 76</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <p><strong>Важная информация:</strong></p>
+                <ul>
+                    <li>При назначении клинера на объект учитывайте его специализацию и текущую загруженность</li>
+                    <li>Для срочных заказов звоните бригадиру Мирон +7 980 489-28-98</li>
+                    <li>Для заказов на уборку после ремонта требуются специально обученные клинеры с оборудованием</li>
+                    <li>Водителей можно привлекать для помощи в переноске оборудования на объекте</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Внутренняя система клинингового сервиса "jullife"</p>
+            <p style="margin-top: 10px; font-size: 14px;">Информация предназначена только для внутреннего использования сотрудниками компании.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Переключение между вкладками
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Убираем активный класс у всех вкладок и контента
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Добавляем активный класс текущей вкладке
+                tab.classList.add('active');
+                
+                // Показываем соответствующий контент
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Обработка кнопок в блоке претензий
+        document.getElementById('reclean-btn').addEventListener('click', () => {
+            alert('Оформление доуборки: откройте форму заявки на доуборку в CRM системе и заполните данные клиента.');
+        });
+        
+        document.getElementById('escalate-btn').addEventListener('click', () => {
+            alert('Эскалация претензии: свяжитесь с руководителем по телефону и предоставьте полную информацию по ситуации.');
+        });
+        
+        document.getElementById('refund-btn').addEventListener('click', () => {
+            alert('Оформление возврата: Только после согласования с руководством! Откройте форму возврата в финансовой системе.');
+        });
+        
+        document.getElementById('reject-btn').addEventListener('click', () => {
+            const confirmReject = confirm('Вы уверены, что хотите отклонить претензию по причине истечения 24 часов? Не забудьте уведомить руководство.');
+            if (confirmReject) {
+                alert('Претензия отклонена. Уведомите клиента о том, что срок подачи претензии (24 часа) истек согласно оферте. Не забудьте уведомить руководство о данном случае.');
+            }
+        });
+    </script>
+</body>
+</html>
