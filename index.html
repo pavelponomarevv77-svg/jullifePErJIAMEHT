@@ -119,6 +119,14 @@
             margin: 25px 0 15px;
         }
         
+        h4 {
+            color: #2c3e50;
+            margin: 20px 0 10px;
+            font-size: 1.1em;
+            border-left: 4px solid #4CAF50;
+            padding-left: 10px;
+        }
+        
         .alert-box {
             background-color: #fff8e1;
             border-left: 4px solid #ffc107;
@@ -275,9 +283,57 @@
         }
         
         .regulation-item {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
             border-bottom: 1px dashed #ddd;
+        }
+        .regulation-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .cleaning-detail {
+            margin: 20px 0 20px 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .cleaning-detail h5 {
+            color: #4a6491;
+            font-size: 1.05em;
+            margin-bottom: 10px;
+        }
+        
+        .cleaning-detail ul, .cleaning-detail ol {
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .equipment-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .equipment-item {
+            background-color: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.9em;
+            color: #2e7d32;
+        }
+        
+        .chemical-item {
+            background-color: #e1f5fe;
+            border: 1px solid #4fc3f7;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.9em;
+            color: #0277bd;
         }
         
         .staff-table {
@@ -734,62 +790,248 @@
             <h2><i class="fas fa-clipboard-list"></i> Регламенты выполнения уборок</h2>
             
             <div class="regulations">
+                <!-- Поддерживающая уборка -->
                 <div class="regulation-item">
-                    <h3>Регламент поддерживающей уборки</h3>
-                    <p><strong>Время выполнения:</strong> 1-3 часа в зависимости от площади</p>
-                    <p><strong>Инструменты и средства:</strong> Швабры, ведра, microfiber тряпки, стеклоочистители, универсальные чистящие средства</p>
-                    <p><strong>Последовательность действий:</strong></p>
-                    <ol>
-                        <li>Собрать и вынести мусор</li>
-                        <li>Протереть все горизонтальные поверхности от пыли</li>
-                        <li>Очистить зеркала и стеклянные поверхности</li>
-                        <li>Протереть сантехнику в ванной и туалете</li>
-                        <li>Пропылесосить и помыть полы</li>
-                        <li>Проверить качество выполненных работ</li>
-                    </ol>
+                    <h3><i class="fas fa-broom" style="color: #4CAF50;"></i> Регламент поддерживающей уборки</h3>
+                    <p><em>Регулярная уборка для поддержания чистоты</em></p>
+                    
+                    <div class="cleaning-detail">
+                        <h4>Жилые комнаты:</h4>
+                        <ol>
+                            <li><strong>Подготовка помещения</strong>
+                                <ul>
+                                    <li>Раскладывание вещей по местам</li>
+                                    <li>Освобождение пола (отодвигание мебели)</li>
+                                    <li>Сбор мусора и грязного белья</li>
+                                </ul>
+                            </li>
+                            <li><strong>Обеспыливание</strong>
+                                <ul>
+                                    <li>Протирка всех горизонтальных и вертикальных поверхностей</li>
+                                    <li>Обработка плафонов, плинтусов, выключателей, розеток</li>
+                                    <li>Чистка дверей, рам, радиаторов, кондиционера</li>
+                                    <li>Удаление пыли с торшеров и карнизов</li>
+                                </ul>
+                            </li>
+                            <li><strong>Стекла, зеркала, экраны</strong>
+                                <ul>
+                                    <li>Чистка зеркал и стеклянных поверхностей</li>
+                                    <li>Очистка экранов телевизоров и мониторов</li>
+                                </ul>
+                            </li>
+                            <li><strong>Пол</strong>
+                                <ul>
+                                    <li>Сухая уборка: пылесос или сухой моп</li>
+                                    <li>Влажная мойка пола с профессиональным средством</li>
+                                </ul>
+                            </li>
+                            <li><strong>Заправка кровати</strong>
+                                <ul>
+                                    <li>Снятие старого белья, отправка в стирку</li>
+                                    <li>Надевание свежего комплекта (простыня, пододеяльник, наволочки)</li>
+                                    <li>Взбивание подушек, укладка одеяла и пледа</li>
+                                </ul>
+                            </li>
+                            <li><strong>Завершение</strong> - Вынос мусора</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cleaning-detail">
+                        <h4>Кухня:</h4>
+                        <ol>
+                            <li><strong>Подготовка</strong>
+                                <ul>
+                                    <li>Общее обеспыливание всех поверхностей</li>
+                                    <li>Освобождение столов и столешниц</li>
+                                    <li>Загрузка грязной посуды в посудомойку или подготовка к мойке</li>
+                                    <li>Расстановка чистой посуды по местам</li>
+                                    <li>Сбор мусора</li>
+                                </ul>
+                            </li>
+                            <li><strong>Поверхности и фасады</strong>
+                                <ul>
+                                    <li>Мойка кухонного фартука</li>
+                                    <li>Чистка фасадов шкафов (снаружи)</li>
+                                    <li>Протирка холодильника, микроволновой печи, вытяжки (снаружи)</li>
+                                    <li>Мойка обеденных и рабочих столов</li>
+                                </ul>
+                            </li>
+                            <li><strong>Плита и духовка (снаружи)</strong>
+                                <ul>
+                                    <li>Снятие и отдельная мойка решеток, ручек, съёмных элементов</li>
+                                    <li>Очистка внешних поверхностей плиты и духовки</li>
+                                </ul>
+                            </li>
+                            <li><strong>Раковина и смеситель</strong>
+                                <ul>
+                                    <li>Удаление крупного мусора из раковины</li>
+                                    <li>Очистка от известкового налета (легкий)</li>
+                                    <li>Мойка чаши раковины, слива, краёв</li>
+                                    <li>Протирка смесителя насухо</li>
+                                </ul>
+                            </li>
+                            <li><strong>Пол</strong>
+                                <ul>
+                                    <li>Сухая уборка (пылесос или сухой моп)</li>
+                                    <li>Влажная мойка пола</li>
+                                </ul>
+                            </li>
+                            <li><strong>Завершение</strong> - Вынос мусора</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cleaning-detail">
+                        <h4>Ванная и туалет:</h4>
+                        <ol>
+                            <li><strong>Подготовка</strong>
+                                <ul>
+                                    <li>Освобождение раковин, ванны, душевой кабины</li>
+                                    <li>Сбор грязного белья</li>
+                                </ul>
+                            </li>
+                            <li><strong>Сантехника</strong>
+                                <ul>
+                                    <li>Чистка раковины, ванны, душевой кабины</li>
+                                    <li>Чистка унитаза (внутри и снаружи)</li>
+                                    <li>Удаление мыльного налета и следов воды (легкий)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Смесители и душевые стойки</strong>
+                                <ul>
+                                    <li>Протирка от известкового налёта (легкий)</li>
+                                    <li>Полировка</li>
+                                </ul>
+                            </li>
+                            <li><strong>Зеркала и стекла</strong>
+                                <ul>
+                                    <li>Чистка зеркал</li>
+                                    <li>Протирка стеклянных полок</li>
+                                </ul>
+                            </li>
+                            <li><strong>Мебель и аксессуары</strong>
+                                <ul>
+                                    <li>Протирка шкафчиков, полок, тумб (снаружи)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Стены и двери</strong>
+                                <ul>
+                                    <li>Мойка кафеля и панелей</li>
+                                    <li>Протирка дверей и ручек</li>
+                                </ul>
+                            </li>
+                            <li><strong>Пол</strong>
+                                <ul>
+                                    <li>Сухая уборка (сбор волос, ворса, пыли)</li>
+                                    <li>Влажная мойка пола</li>
+                                </ul>
+                            </li>
+                            <li><strong>Завершение</strong> - Вынос мусора</li>
+                        </ol>
+                    </div>
+                    
+                    <h4>Используемое оборудование и химия:</h4>
+                    <div class="equipment-list">
+                        <span class="equipment-item">Фартук Jul Life</span>
+                        <span class="equipment-item">Сменная обувь/бахилы</span>
+                        <span class="equipment-item">Ветошь белая</span>
+                        <span class="equipment-item">Салфетки 4 цвета</span>
+                        <span class="equipment-item">Безворсовая салфетка</span>
+                        <span class="equipment-item">Губки</span>
+                        <span class="equipment-item">Перчатки</span>
+                        <span class="equipment-item">2 МОП (красн./цветн.)</span>
+                        <span class="equipment-item">Скребок метал.</span>
+                        <span class="equipment-item">Насадка шубка</span>
+                        <span class="equipment-item">Телескоп. держатель</span>
+                        <span class="equipment-item">Ведро 5л</span>
+                        <span class="equipment-item">Пакеты 30/120л</span>
+                        <span class="chemical-item">D-203-R (стекла)</span>
+                        <span class="chemical-item">L-101-R (налет/ржавчина)</span>
+                        <span class="chemical-item">D-207 (поверхности)</span>
+                    </div>
+                    <p><em>*Водосгон для окон добавляется при заказе доп. услуги</em></p>
                 </div>
                 
+                <!-- Генеральная лайт -->
                 <div class="regulation-item">
-                    <h3>Регламент генеральной уборки "Лайт"</h3>
-                    <p><strong>Время выполнения:</strong> 3-5 часов в зависимости от площади</p>
-                    <p><strong>Дополнительные инструменты:</strong> Стремянка, щетки для радиаторов, средства для удаления жировых отложений</p>
-                    <p><strong>Последовательность действий (включая все этапы поддерживающей уборки плюс):</strong></p>
-                    <ol>
-                        <li>Очистить стены до уровня 1.5 метра от загрязнений средней стойкости</li>
-                        <li>Протереть выключатели, дверные ручки, розетки</li>
-                        <li>Очистить радиаторы отопления внутри и снаружи</li>
-                        <li>Помыть кухонные фасады и бытовую технику снаружи</li>
-                        <li>Удалить средние жировые отложения на кухне и ванной</li>
-                        <li>Помыть плитку в ванной комнате с удалением налета</li>
-                    </ol>
+                    <h3><i class="fas fa-star" style="color: #2196F3;"></i> Регламент генеральной уборки "Лайт"</h3>
+                    <p><em>Более тщательная уборка с удалением загрязнений средней стойкости (не застоявшиеся)</em></p>
+                    <p><strong>Включает в себя все этапы поддерживающей уборки, а также:</strong></p>
+                    <ul>
+                        <li>Мойка розеток, выключателей, дверных ручек</li>
+                        <li>Мойка кухонных фасадов снаружи</li>
+                        <li>Очищение жировых отложений средней степени</li>
+                        <li>Очищение водного налета средней степени</li>
+                    </ul>
+                    <p><strong>Доставка оборудования и химии не входит.</strong></p>
+                    
+                    <h4>Используемое оборудование и химия (дополнительно к набору для поддерживающей):</h4>
+                    <div class="equipment-list">
+                        <span class="equipment-item">Водосгон для окон</span>
+                        <span class="chemical-item">F-307-R (жир и нагар)</span>
+                        <span class="chemical-item">S-401 (цемент, ржавчина)</span>
+                        <span class="chemical-item">L-102-R (гель для унитаза)</span>
+                        <span class="chemical-item">D-211-R (нейтрализатор запахов)</span>
+                    </div>
+                     <p><em>Полный набор для поддерживающей уборки (см. выше) также входит в комплект.</em></p>
                 </div>
                 
+                <!-- Генеральная уборка -->
                 <div class="regulation-item">
-                    <h3>Регламент генеральной уборки</h3>
-                    <p><strong>Время выполнения:</strong> 5-8 часов в зависимости от площади</p>
-                    <p><strong>Дополнительные инструменты:</strong> Профессиональная стремянка, набор щеток для глубокой очистки, парогенератор, специальная химия</p>
-                    <p><strong>Последовательность действий (включая все этапы генеральной "Лайт" плюс):</strong></p>
-                    <ol>
-                        <li>Снять и помыть люстры, светильники (с согласия клиента)</li>
-                        <li>Очистить внутренние поверхности шкафов и полок</li>
-                        <li>Помыть двери со всех сторон, включая косяки</li>
-                        <li>Очистить доступные пространства за и под мебелью</li>
-                        <li>Применение специальной химии для стойких загрязнений</li>
-                    </ol>
+                    <h3><i class="fas fa-crown" style="color: #FF9800;"></i> Регламент генеральной уборки</h3>
+                    <p><em>Полная, глубокая уборка всего помещения с использованием специализированного оборудования</em></p>
+                    <p><strong>Включает в себя все этапы генеральной "Лайт", а также:</strong></p>
+                    <ul>
+                        <li>Очищение застарелых и сложных жировых отложений</li>
+                        <li>Очищение застарелого и сложного водного налета</li>
+                        <li>Мойка радиаторов</li>
+                        <li>Доставка оборудования</li>
+                    </ul>
+                    
+                    <h4>Используемое оборудование и химия (Набор для генеральной и после ремонта 2в1):</h4>
+                    <div class="equipment-list">
+                        <span class="equipment-item">Ветошь белая</span>
+                        <span class="equipment-item">Салфетки микрофибра (4 цв.)</span>
+                        <span class="equipment-item">Салф. безворсовая</span>
+                        <span class="equipment-item">Салф. из замши</span>
+                        <span class="equipment-item">Губки 4 шт</span>
+                        <span class="equipment-item">Перчатки 2 пары</span>
+                        <span class="equipment-item">Пакеты 120л</span>
+                        <span class="equipment-item">Моп для швабры 2</span>
+                        <span class="equipment-item">Водосгон</span>
+                        <span class="equipment-item">Скребок</span>
+                        <span class="equipment-item">Насадка Шубка</span>
+                        <span class="equipment-item">Телескоп. держатель</span>
+                        <span class="equipment-item">Ведро 5л</span>
+                        <span class="equipment-item">Пылесос (щетка/плоская)</span>
+                        <span class="equipment-item">Парогенератор</span>
+                        <span class="equipment-item">Стремянка</span>
+                        <span class="chemical-item">D-202 (полы и интерьер)</span>
+                        <span class="chemical-item">D-207 (поверхности)</span>
+                        <span class="chemical-item">S-401 (цемент, ржавчина)</span>
+                        <span class="chemical-item">D-211-R (нейтрализатор запахов)</span>
+                        <span class="chemical-item">S-403-R (клей, скотч, жвачка)</span>
+                        <span class="chemical-item">D-203-R (стекла)</span>
+                        <span class="chemical-item">L-102-R (гель для унитаза)</span>
+                        <span class="chemical-item">L-104 (очистка стоков)</span>
+                        <span class="chemical-item">F-307-R (жир и нагар)</span>
+                        <span class="chemical-item">L-101-R (налет, ржавчина)</span>
+                    </div>
                 </div>
                 
-                <div class="regulation-item">
-                    <h3>Регламент уборки после ремонта</h3>
-                    <p><strong>Время выполнения:</strong> 4-10 часов в зависимости от объема работ</p>
-                    <p><strong>Специальные инструменты:</strong> Строительный пылесос, скребки для удаления строительных смесей, средства для удаления монтажной пены</p>
-                    <p><strong>Последовательность действий:</strong></p>
-                    <ol>
-                        <li>Удаление крупного строительного мусора</li>
-                        <li>Очистка всех поверхностей от строительной пыли с помощью строительного пылесоса</li>
-                        <li>Удаление следов строительных смесей, клея, монтажной пены</li>
-                        <li>Влажная уборка всех поверхностей с применением моющих средств</li>
-                        <li>Мытье полов, возможно в несколько этапов</li>
-                    </ol>
+                <h3 style="margin-top: 30px;">Дополнительные услуги:</h3>
+                <div class="extra-services">
+                    <span class="service-tag">Глажка</span>
+                    <span class="service-tag">Мытье посуды</span>
+                    <span class="service-tag">Мытье кухонных модулей</span>
+                    <span class="service-tag">Мытье окон</span>
+                    <span class="service-tag">Мытье холодильника</span>
+                    <span class="service-tag">Мытье СВЧ</span>
+                    <span class="service-tag">Мытье духового шкафа</span>
+                    <span class="service-tag">Очистка вытяжки</span>
+                    <span class="service-tag">Уборка лотка питомца</span>
+                    <span class="service-tag">Уборка на балконе/лоджии</span>
+                    <span class="service-tag">Химчистка мягкой мебели</span>
+                    <span class="service-tag">Химчистка ковров</span>
                 </div>
             </div>
         </div>
